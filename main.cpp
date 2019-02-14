@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
   std::size_t n = m;
   std::size_t k = 10;
   std::size_t print_cnt = 30;
-  auto T = std::size_t(1e8);
+  auto T = std::size_t(1e3);
 
   BallsIntoBins bib(m, n);
 
@@ -20,12 +20,14 @@ int main(int argc, char *argv[]){
   auto print_interval = (T  + print_cnt) / print_cnt;
   for (std::size_t i = 0;i < T;++ i) {
     auto buckets = bib.simulate();
-    std::vector<size_t> counters(buckets.size(), 0);
+    std::vector<size_t> counters;
+    counters.reserve(buckets.size());
     for (const auto &b: buckets)
       counters.push_back(b.second);
-    top_k_element(counters.begin(), counters.begin() + k - 1, counters.end(), std::greater<>());
+    //top_k_element(counters.begin(), counters.begin() + k - 1, counters.end(), std::greater<>());
+    std::sort(counters.begin(), counters.end(), std::greater<>());
     if(i % print_interval == 0) {
-      std::for_each(counters.begin(), counters.begin() + k - 1,
+      std::for_each(counters.begin(), counters.begin() + k,
         [](const size_t & c) { print_fw<6>(c);});
       std::cout << "\n";
      }
