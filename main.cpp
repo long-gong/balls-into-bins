@@ -10,8 +10,8 @@ int main(int argc, char *argv[]){
   auto m = size_t(1e6);
   std::size_t n = m;
   std::size_t k = 10;
-  std::size_t print_cnt = 30;
-  auto T = std::size_t(1e3);
+  std::size_t print_cnt = 20;
+  auto T = std::size_t(1e4);
 
   BallsIntoBins bib(m, n);
 
